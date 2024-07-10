@@ -1,0 +1,50 @@
+.page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  --bg-dot-color: rgba(var(--foreground-rgb), 0.05);
+  background: linear-gradient(
+      45deg,
+      transparent 49%,
+      var(--bg-dot-color) 49% 51%,
+      transparent 51%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 49%,
+      var(--bg-dot-color) 49% 51%,
+      transparent 51%
+    );
+  background-size: 5em 5em;
+}
+
+.box {
+  max-width: 28rem;
+  padding: 1.5rem 3rem;
+  text-align: center;
+  border-radius: 10px;
+  background: rgba(var(--foreground-rgb), 0.3);
+  box-shadow: 20px 20px 60px var(--tile-start-rgb),
+    -20px -20px 60px var(--tile-end-rgb);
+}
+
+.header {
+  margin-top: 1rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+}
+
+.login {
+  margin-top: 1.5rem;
+  margin-top: 1rem;
+}

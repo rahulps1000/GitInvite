@@ -1,0 +1,104 @@
+.main {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: 75px;
+  --bg-dot-color: rgba(var(--foreground-rgb), 0.05);
+  background: linear-gradient(
+      45deg,
+      var(--bg-dot-color) 10%,
+      transparent 11%,
+      transparent 89%,
+      var(--bg-dot-color) 90%
+    ),
+    linear-gradient(
+      135deg,
+      var(--bg-dot-color) 10%,
+      transparent 11%,
+      transparent 89%,
+      var(--bg-dot-color) 90%
+    ),
+    radial-gradient(circle, transparent 25%, rgb(var(--background-end-rgb)) 26%),
+    linear-gradient(
+      45deg,
+      transparent 46%,
+      var(--bg-dot-color) 47%,
+      var(--bg-dot-color) 52%,
+      transparent 53%
+    ),
+    linear-gradient(
+      135deg,
+      transparent 46%,
+      var(--bg-dot-color) 47%,
+      var(--bg-dot-color) 52%,
+      transparent 53%
+    );
+  background-size: 2.5em 2.5em;
+  opacity: 1;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  gap: 40px;
+}
+
+.header {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.card {
+  background: rgb(var(--nav-background-rgb));
+  padding: 20px;
+  border-radius: 10px;
+  outline: 2px solid rgba(var(--foreground-rgb), 0.3);
+}
+
+.title {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.title h3 {
+  font-size: 28px;
+}
+
+.title span {
+  font-size: 20px;
+}
+
+.description {
+  font-size: 20px;
+  color: rgba(var(--foreground-rgb), 0.5);
+  padding-bottom: 25px;
+}
+
+.buttons {
+  display: flex;
+  gap: 25px;
+  font-size: 20px;
+  align-items: center;
+}
+
+.button {
+  min-width: 160px;
+  background-color: rgba(var(--foreground-rgb), 0.6);
+  padding: 8px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  color: rgb(var(--background-end-rgb));
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button span {
+  font-size: 19px;
+}

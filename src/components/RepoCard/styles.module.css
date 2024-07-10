@@ -1,0 +1,60 @@
+.card {
+  background: rgb(var(--nav-background-rgb));
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  outline: 2px solid rgba(var(--foreground-rgb), 0.3);
+}
+
+.title {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+
+.title h3 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.title span {
+  font-size: 18px;
+  cursor: default;
+}
+
+.description {
+  color: rgba(var(--foreground-rgb), 0.5);
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  height: 54px;
+  line-height: 18px;
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px 0;
+}
+
+.button {
+  width: 120px;
+  background-color: rgba(var(--foreground-rgb), 0.6);
+  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  color: rgb(var(--background-end-rgb));
+  cursor: pointer;
+  border-radius: 5px;
+}

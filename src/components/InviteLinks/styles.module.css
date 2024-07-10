@@ -1,0 +1,59 @@
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardHeader h3 {
+  padding-top: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.card hr {
+  margin: 25px 10px;
+}
+
+.noInvite {
+  text-align: center;
+  color: rgba(var(--foreground-rgb), 0.5);
+}
+
+.content {
+  /* position: relative; */
+}
+
+.button {
+  min-width: 160px;
+  background-color: rgba(var(--foreground-rgb), 0.6);
+  padding: 8px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  color: rgb(var(--background-end-rgb));
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.popup {
+  height: 100dvh;
+  width: 100vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(var(--background-end-rgb), 0.6);
+  display: grid;
+  place-items: center;
+}
+
+.card {
+  padding: 30px;
+  background: rgb(var(--background-end-rgb));
+  border-radius: 10px;
+  border: 3px solid rgba(var(--foreground-rgb), 0.6);
+}
+
+.card h2 {
+  font-size: 20px;
+}

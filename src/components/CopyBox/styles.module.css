@@ -1,0 +1,25 @@
+.copybox {
+  display: flex;
+  gap: 0;
+}
+
+.copybox input,
+.copybox input:active,
+.copybox input:focus {
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
+  outline: 1px solid rgba(var(--foreground-rgb), 1);
+  border-right: none;
+  background: rgb(var(--nav-background-rgb));
+  min-width: 250px;
+  max-width: 90vw;
+}
+
+.copybox button {
+  padding: 5px;
+  border-radius: 0 5px 5px 0;
+  outline: 1px solid rgba(var(--foreground-rgb), 1);
+  border-left: none;
+  background: rgb(var(--nav-background-rgb));
+  cursor: pointer;
+}
