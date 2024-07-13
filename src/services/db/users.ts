@@ -13,6 +13,6 @@ export async function addOrUpdateUser(user: IUser) {
 
 export async function getUser(id: string): Promise<any> {
   await dbConnect();
-  const u = await User.findOne({ id: Number.parseInt(id) });
+  const u = await User.findOne({ id: Number(id) });
   return u;
 }

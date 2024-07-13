@@ -7,6 +7,8 @@ import { getUser } from "@/services/db/users";
 import { authOptions } from "@/services/auth";
 import { IRepo } from "@/models/Repo";
 import InviteLinks from "@/components/InviteLinks";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default async function Page({
   params,
@@ -59,7 +61,8 @@ export default async function Page({
             )}
           </div>
         </div>
-        <InviteLinks />
+        <InviteLinks userId={userId} />
+        <ToastContainer />
       </div>
     </div>
   );

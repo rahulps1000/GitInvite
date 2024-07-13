@@ -3,9 +3,17 @@
 import React from "react";
 import styles from "./styles.module.css";
 import CopyBox from "../CopyBox";
+import Loader from "../Loader";
 
 const InviteLinks = () => {
   const invites = [];
+  const [showPopup, setPopup] = useState<boolean>(false);
+  const [inviteLink, setInviteLink] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const closePopup = () => {
+    setInviteLink(null);
+    setPopup(false);
+  };
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -25,13 +33,40 @@ const InviteLinks = () => {
           <div className={styles.noInvite}>No Invite Links Generated</div>
         )}
       </div>
+      </div>
+      {showPopup && inviteLink && (
       <div className={styles.popup}>
         <div className={styles.card}>
-          <h2>Generate Invite Link</h2>
-          <CopyBox text="jhgasd kjhasg jkhsad" />
+            <span className="material-symbols-outlined" onClick={closePopup}>
+              close
+            </span>
+            <h2>
+              {inviteLink
+                ? "Invite Link Generated"
+                : error
+                ? "Failed to generate Invite Link"
+                : "Generating Invite Link"}
+            </h2>
+            {!inviteLink && !error && <Loader />}
+            {inviteLink && (
+              <p>
+                Note: This invite link can only be used by one person and will
+                expire after 24h. Anyone (only one) with this link will be able
+                to access your repo.
+              </p>
+            )}
+            {error && (
+              <p>
+                {error}
+                <br />
+                Please Contact Site Admin
+              </p>
+            )}
+            {inviteLink && <CopyBox text={inviteLink} />}
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
