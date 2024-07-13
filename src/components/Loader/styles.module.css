@@ -1,10 +1,12 @@
 .loader {
-  width: 50px;
+  width: 40px;
   aspect-ratio: 1;
   border-radius: 50%;
   border: 8px solid;
-  border-color: rgb(var(--background-end-rgb)) #0000;
+  border-color: rgb(var(--foreground-rgb)) #0000;
   animation: l1 1s infinite;
+  margin: auto;
+  margin-top: 20px;
 }
 @keyframes l1 {
   to {
