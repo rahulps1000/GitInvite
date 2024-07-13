@@ -5,6 +5,8 @@ import { useParams } from "next/navigation";
 import styles from "./styles.module.css";
 import CopyBox from "../CopyBox";
 import Loader from "../Loader";
+import axios from "axios";
+import { getUrl } from "@/services/url";
 
 const InviteLinks = ({ userId }: { userId: string }) => {
   const { repo_id } = useParams<{ repo_id: string }>();
@@ -16,9 +18,21 @@ const InviteLinks = ({ userId }: { userId: string }) => {
 
   const generateInviteLink = async () => {
     setPopup(true);
+    const url = getUrl();
+    try {
+      const { data } = await axios.post("/api/github/invite/create", {
+        repo_id: repo_id,
+        user_id: userId,
+      });
+      setInviteLink(url + "/invite/" + data.token);
+    } catch (error) {
+      console.log(error);
+      setError("Internal Server Error");
+    }
   };
   const closePopup = () => {
     setInviteLink(null);
+    setError(null);
     setPopup(false);
   };
   return (

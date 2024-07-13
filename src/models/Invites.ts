@@ -5,7 +5,6 @@ export interface IInvite extends Document {
   user: string;
   status: string;
   token: string;
-  node_id: string;
   owner: number;
   created_on: Date;
   expiry: number;
@@ -26,10 +25,6 @@ const inviteSchema: Schema = new mongoose.Schema({
     default: "Pending",
   },
   token: {
-    type: String,
-    required: true,
-  },
-  node_id: {
     type: String,
     required: true,
   },
