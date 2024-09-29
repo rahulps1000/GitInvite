@@ -1,0 +1,30 @@
+.inputbox {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+}
+
+.inputbox label {
+  color: rgba(var(--foreground-rgb), 0.7);
+}
+
+.inputbox input {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid rgba(var(--foreground-rgb), 0.3);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.inputbox span {
+  color: rgb(219, 16, 16);
+  font-size: 12px;
+  padding-left: 7px;
+}
+
+.inputbox .error {
+  border: 1px solid rgb(219, 16, 16);
+}

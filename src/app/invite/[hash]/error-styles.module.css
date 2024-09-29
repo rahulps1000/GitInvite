@@ -1,0 +1,81 @@
+.main {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: 75px;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(var(--background-end-rgb));
+  padding: 3rem 1rem;
+}
+
+.innerContainer {
+  max-width: 28rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.iconContainer {
+  margin: 0 auto;
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+  background-color: rgb(var(--foreground-rgb), 0.4);
+  padding: 1.5rem;
+}
+
+.icon {
+  height: 100%;
+  width: 100%;
+  color: rgb(var(--foreground-rgb), 0.7);
+}
+
+.title {
+  margin-top: 2rem;
+  font-size: 1.875rem;
+  font-weight: bold;
+  line-height: 2.25rem;
+  color: rgb(var(--foreground-rgb));
+}
+
+.message {
+  margin-top: 1rem;
+  color: rgb(var(--foreground-rgb), 0.5);
+}
+
+.buttonContainer {
+  margin-top: 1.5rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.375rem;
+  background-color: rgb(var(--foreground-rgb));
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: medium;
+  color: rgb(var(--background-end-rgb));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: rgb(var(--foreground-rgb), 0.9);
+}
+
+.button:focus {
+  outline: 2px solid rgb(var(--foreground-rgb));
+  outline-offset: 2px;
+}

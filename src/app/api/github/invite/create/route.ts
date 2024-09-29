@@ -47,10 +47,11 @@ export async function POST(request: Request) {
       repo_id: Number(body.repo_id),
       user: "",
       status: "Pending",
-      token: hash,
+      hash: hash,
       owner: Number(body.user_id),
       created_on: now,
       expiry: 24,
+      token: encoded,
     } as IInvite;
 
     await newInvite(invite);

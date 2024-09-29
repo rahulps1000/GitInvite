@@ -21,7 +21,12 @@ export default async function Page({
 
   const userId = session?.user?.id;
   const user = await getUser(userId ?? "0");
-  const repo: IRepo = await getRepo(user.token, params.repo_id);
+  let repo: IRepo;
+  try {
+    repo = await getRepo(user.token, params.repo_id);
+  } catch (error) {
+    redirect("/");
+  }
 
   return (
     <div className={styles.main}>

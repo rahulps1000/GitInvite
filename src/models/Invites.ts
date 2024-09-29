@@ -8,6 +8,7 @@ export interface IInvite extends Document {
   owner: number;
   created_on: Date;
   expiry: number;
+  hash: string;
 }
 
 const inviteSchema: Schema = new mongoose.Schema({
@@ -41,9 +42,20 @@ const inviteSchema: Schema = new mongoose.Schema({
     required: true,
     default: 24,
   },
+  hash: {
+    type: String,
+    required: true,
+  },
 });
 
 const Invite =
   mongoose.models.Invite || mongoose.model<IInvite>("Invite", inviteSchema);
+
+export interface IInvites {
+  invites: Array<IInvite>;
+  limit: number;
+  page: number;
+  total: number;
+}
 
 export default Invite;

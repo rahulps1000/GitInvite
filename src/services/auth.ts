@@ -24,7 +24,7 @@ export const authOptions: AuthOptions = {
       const p = profile as GithubProfile;
       const user = {
         id: p.id,
-        name: p.name ?? "",
+        name: p.name ?? p.login,
         email: p.email ?? "",
         login: p.login,
         token: token,

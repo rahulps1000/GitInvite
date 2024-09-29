@@ -11,7 +11,7 @@ export async function addOrUpdateUser(user: IUser) {
   }
 }
 
-export async function getUser(id: string): Promise<any> {
+export async function getUser(id: string): Promise<IUser> {
   await dbConnect();
   const u = await User.findOne({ id: Number(id) });
   return u;

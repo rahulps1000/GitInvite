@@ -1,0 +1,15 @@
+.main {
+  min-height: 100vh;
+  min-height: 100svh;
+  height: 100svh;
+  padding-top: 75px;
+  --bg-dot-color: rgba(var(--foreground-rgb), 0.05);
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+}

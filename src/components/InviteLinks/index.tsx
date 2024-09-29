@@ -1,20 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import styles from "./styles.module.css";
 import CopyBox from "../CopyBox";
 import Loader from "../Loader";
 import axios from "axios";
 import { getUrl } from "@/services/url";
+import { IInvites } from "@/models/Invites";
+import Link from "next/link";
+import { Bounce, toast } from "react-toastify";
 
 const InviteLinks = ({ userId }: { userId: string }) => {
   const { repo_id } = useParams<{ repo_id: string }>();
 
-  const invites = [];
   const [showPopup, setPopup] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [inviteLink, setInviteLink] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(0);
+  const [invites, setInvites] = useState<IInvites | null>(null);
 
   const generateInviteLink = async () => {
     setPopup(true);
@@ -25,6 +30,7 @@ const InviteLinks = ({ userId }: { userId: string }) => {
         user_id: userId,
       });
       setInviteLink(url + "/invite/" + data.token);
+      await getInviteLinks();
     } catch (error) {
       console.log(error);
       setError("Internal Server Error");
@@ -35,6 +41,59 @@ const InviteLinks = ({ userId }: { userId: string }) => {
     setError(null);
     setPopup(false);
   };
+
+  const options: Intl.DateTimeFormatOptions = {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+    hour12: true,
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+
+  const getInviteLinks = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get("/api/github/invite", {
+        params: { repo_id: repo_id, user_id: userId, page: page },
+      });
+      setInvites(data.invites);
+    } catch (error: any) {
+      console.error(error.response);
+    }
+    setLoading(false);
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(getUrl() + "/invite/" + text);
+    toast.info("Copied to Clipboard", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      transition: Bounce,
+    });
+  };
+
+  const changePage = (c_page: number | "next" | "prev") => {
+    if (c_page == "prev" && page > 0) {
+      setPage(page - 1);
+    } else if (
+      c_page == "next" &&
+      page < Math.ceil(invites!.total / invites!.limit) - 1
+    ) {
+      setPage(page + 1);
+    } else if (Number.isInteger(c_page)) {
+      setPage(Number(c_page));
+    }
+  };
+
+  useEffect(() => {
+    getInviteLinks();
+  }, [page]);
+
   return (
     <>
       <div className={styles.card}>
@@ -49,16 +108,121 @@ const InviteLinks = ({ userId }: { userId: string }) => {
         </div>
         <hr />
         <div className="invites">
-          {invites.length > 0 ? (
-            "invites"
+          {loading && <Loader />}
+          {!loading && invites && invites?.invites.length > 0 ? (
+            <div className={styles.tableContainer}>
+              <div className={styles.tableWrapper}>
+                <div className={styles.tableOverflow}>
+                  <table className={styles.table}>
+                    <thead className={styles.tableHead}>
+                      <tr className={styles.tableHRow}>
+                        <th className={styles.tableHeader}>Created</th>
+                        <th className={styles.tableHeader}>Link</th>
+                        <th className={styles.tableHeader}>User</th>
+                        <th className={styles.tableHeader}>Status</th>
+                        <th className={styles.tableHeader}>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className={styles.tableBody}>
+                      {invites.invites.map((i, index) => (
+                        <tr className={styles.tableRow} key={index}>
+                          <td className={styles.tableCell}>
+                            {new Date(
+                              i.created_on.toString()
+                            ).toLocaleDateString("en-US", options)}
+                          </td>
+                          <td
+                            className={`${styles.tableCell} ${styles.linkCell}`}
+                          >
+                            <Link
+                              className={styles.link}
+                              href={getUrl() + `/invite/${i.token}`}
+                              target="_blank"
+                              title={i.token}
+                            >
+                              {i.token}
+                            </Link>
+                            <span
+                              title="copy"
+                              onClick={() => copyToClipboard(i.token)}
+                              className="material-symbols-outlined"
+                            >
+                              content_copy
+                            </span>
+                          </td>
+                          <td className={styles.tableCell}>
+                            {i.user ? i.user : "NA"}
+                          </td>
+                          <td className={styles.tableCell}>{i.status}</td>
+                          <td className={styles.tableCell}>
+                            {i.status == "Pending" && (
+                              <button
+                                className={styles.redbutton}
+                                title="Cancel Invitation link"
+                              >
+                                Cancel
+                              </button>
+                            )}
+                            {i.status == "Invited" && (
+                              <button
+                                className={styles.redbutton}
+                                title="Revoke permission"
+                              >
+                                Revoke
+                              </button>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className={styles.paginationContainer}>
+                {page > 0 && (
+                  <div
+                    onClick={() => changePage("prev")}
+                    className={`material-symbols-outlined ${styles.pageIcon}`}
+                  >
+                    chevron_left
+                  </div>
+                )}
+                {Math.ceil(invites.total / invites.limit) > 1 &&
+                  Array.from(
+                    Array(Math.ceil(invites.total / invites.limit)).keys()
+                  ).map((n, i) => {
+                    return (
+                      <div
+                        key={i}
+                        onClick={() => changePage(i)}
+                        className={`${styles.pageIcon} ${
+                          page == i ? styles.selectedPage : ""
+                        }`}
+                      >
+                        {i + 1}
+                      </div>
+                    );
+                  })}
+                {page < Math.ceil(invites.total / invites.limit) - 1 && (
+                  <div
+                    onClick={() => changePage("next")}
+                    className={`material-symbols-outlined ${styles.pageIcon}`}
+                  >
+                    chevron_right
+                  </div>
+                )}
+              </div>
+            </div>
           ) : (
-            <div className={styles.noInvite}>No Invite Links Generated</div>
+            !loading && (
+              <div className={styles.noInvite}>No Invite Links Generated</div>
+            )
           )}
         </div>
       </div>
       {showPopup && (
         <div className={styles.popup}>
-          <div className={styles.card}>
+          <div className={styles.pcard}>
             <span className="material-symbols-outlined" onClick={closePopup}>
               close
             </span>

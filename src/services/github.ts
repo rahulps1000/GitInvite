@@ -32,3 +32,33 @@ export async function getRepo(token: string, id: string): Promise<IRepo> {
   const repo = await octokit.request("GET /repositories/:id", { id });
   return repo.data as IRepo;
 }
+
+export async function inviteUser(
+  token: string,
+  repo_id: string,
+  username: string
+) {
+  const octokit = new Octokit({
+    auth: token,
+  });
+  const repo = (await getRepo(token, repo_id)) as any;
+  const x = await octokit.rest.repos.addCollaborator({
+    owner: repo.owner.login,
+    repo: repo.name,
+    username: username,
+    permission: "push",
+  });
+  return [repo.html_url, x.data.html_url];
+}
+
+export async function acceptInvite(token: string, repo_id: string) {
+  const octokit = new Octokit({
+    auth: token,
+  });
+  const invites =
+    await octokit.rest.repos.listInvitationsForAuthenticatedUser();
+  const invite = invites.data.find((a) => a.repository.id === Number(repo_id))!;
+  await octokit.rest.repos.acceptInvitationForAuthenticatedUser({
+    invitation_id: invite.id,
+  });
+}

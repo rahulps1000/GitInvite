@@ -1,0 +1,27 @@
+.inviteform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 95%;
+  margin: auto;
+  gap: 10px;
+}
+
+.button {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 28rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 60;
+  text-align: center;
+  border: none;
+  color: #fff;
+  background-color: #6b7280;
+  cursor: pointer;
+}

@@ -1,0 +1,61 @@
+.card {
+  background: rgb(var(--nav-background-rgb));
+  padding: 20px;
+  border-radius: 10px;
+  outline: 2px solid rgba(var(--foreground-rgb), 0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card h3 {
+  color: rgba(var(--foreground-rgb), 0.7);
+}
+
+.card h2 {
+  padding: 5px 0;
+}
+
+.card p {
+  color: rgba(var(--foreground-rgb), 0.5);
+  word-wrap: break-word;
+  overflow: hidden;
+  max-width: 400px;
+  padding-bottom: 10px;
+}
+
+.section {
+  padding: 20px 0;
+}
+.section h3 {
+  font-size: 20px;
+}
+
+.section p {
+  font-size: 13px;
+}
+
+.section .button {
+  width: 80%;
+  margin: auto;
+}
+
+.seperator {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.seperator hr {
+  width: 40%;
+  height: 2px;
+  background: rgba(var(--foreground-rgb), 0.5);
+  border: none;
+}
+
+.seperator span {
+  color: rgba(var(--foreground-rgb), 0.5);
+}

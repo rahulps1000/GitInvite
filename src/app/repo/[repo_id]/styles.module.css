@@ -39,7 +39,7 @@
 .content {
   height: 100%;
   width: 100%;
-  padding: 20px;
+  padding: 30px;
   display: grid;
   gap: 40px;
 }
@@ -56,6 +56,7 @@
   padding: 20px;
   border-radius: 10px;
   outline: 2px solid rgba(var(--foreground-rgb), 0.3);
+  width: calc(100vw - 60px);
 }
 
 .title {

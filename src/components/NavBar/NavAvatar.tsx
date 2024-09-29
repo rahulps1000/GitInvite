@@ -42,6 +42,7 @@ const NavAvatar = ({ image, name = "" }: { image: string; name: string }) => {
         height={50}
         className={styles.avatarImg}
         onClick={toogleMenu}
+        title={name}
       />
       <div
         className={styles.avatarMenu}
