@@ -45,12 +45,11 @@ const rateLimit = (options: RateLimitOptions) => {
   };
 };
 
-// export const middleware = rateLimit({
-//   maxRequests: 5,
-//   windowMs: 60 * 1000, // 1 minute
-// });
+export const middleware = rateLimit({
+  maxRequests: 5,
+  windowMs: 60 * 1000, // 1 minute
+});
 
-export const middleware = () => {};
 export const config = {
   matcher: "/invite/:hash*",
 };
