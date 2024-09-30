@@ -62,3 +62,19 @@ export async function acceptInvite(token: string, repo_id: string) {
     invitation_id: invite.id,
   });
 }
+
+export async function revokeAccess(
+  token: string,
+  repo_id: string,
+  username: string
+) {
+  const octokit = new Octokit({
+    auth: token,
+  });
+  const repo = (await getRepo(token, repo_id)) as any;
+  await octokit.rest.repos.removeCollaborator({
+    owner: repo.owner.login,
+    repo: repo.name,
+    username: username,
+  });
+}

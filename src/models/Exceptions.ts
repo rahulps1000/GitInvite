@@ -19,9 +19,16 @@ export class TamperedToken extends Error {
   }
 }
 
-export class InviteAlreadyConsumed extends Error {
+export class InviteAlreadyAccepted extends Error {
   constructor() {
     super("The invite link is already consumed");
-    this.name = "InviteAlreadyConsumed";
+    this.name = "InviteAlreadyAccepted";
+  }
+}
+
+export class InviteLinkCancelled extends Error {
+  constructor() {
+    super("The invite link is cancceld by the owner");
+    this.name = "InviteLinkCancelled";
   }
 }

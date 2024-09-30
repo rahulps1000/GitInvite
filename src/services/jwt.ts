@@ -8,7 +8,8 @@ import {
   InvalidToken,
   LinkExpired,
   TamperedToken,
-  InviteAlreadyConsumed,
+  InviteAlreadyAccepted,
+  InviteLinkCancelled,
 } from "@/models/Exceptions";
 import { getInvite } from "./db/invites";
 
@@ -40,8 +41,11 @@ export const verifyAndDecryptToken = async (
   }
 
   const invite = await getInvite(data.hash, data.repo_id.toString());
+  if (invite.status === "Cancelled") {
+    throw new InviteLinkCancelled();
+  }
   if (invite.status !== "Pending" || invite.user !== "") {
-    throw new InviteAlreadyConsumed();
+    throw new InviteAlreadyAccepted();
   }
 
   return data;

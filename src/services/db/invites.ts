@@ -13,11 +13,11 @@ export async function getInvite(hash: string, repo_id: string): Promise<any> {
 }
 
 export async function getOwnerId(
-  token: string,
+  hash: string,
   repo_id: string
 ): Promise<number> {
   await dbConnect();
-  const i = await Invite.findOne({ repo_id: Number(repo_id), hash: token });
+  const i = await Invite.findOne({ repo_id: Number(repo_id), hash: hash });
   return i.owner;
 }
 
@@ -39,13 +39,13 @@ export async function getInvites(
 }
 
 export async function updateStatus(
-  token: string,
+  hash: string,
   repo_id: string,
   status: string
 ) {
   await dbConnect();
   const i = await Invite.findOneAndUpdate(
-    { repo_id: Number(repo_id), token: token },
+    { repo_id: Number(repo_id), hash: hash },
     { status: status }
   );
   return !!i;

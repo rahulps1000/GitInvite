@@ -6,7 +6,6 @@ import {
 } from "@/services/db/invites";
 import { getUser } from "@/services/db/users";
 import { acceptInvite, inviteUser } from "@/services/github";
-import { stat } from "fs";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 

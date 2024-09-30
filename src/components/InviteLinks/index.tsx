@@ -42,6 +42,35 @@ const InviteLinks = ({ userId }: { userId: string }) => {
     setPopup(false);
   };
 
+  const cancelInvite = async (token: string) => {
+    try {
+      const { data } = await axios.post("/api/github/invite/cancel", {
+        repo_id: repo_id,
+        token: token,
+      });
+      toast.success(data.message);
+      getInviteLinks();
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.messge);
+    }
+  };
+
+  const revokeInvite = async (token: string, username: string) => {
+    try {
+      const { data } = await axios.post("/api/github/invite/revoke", {
+        repo_id: repo_id,
+        token: token,
+        username: username,
+      });
+      toast.success(data.message);
+      getInviteLinks();
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.messge);
+    }
+  };
+
   const options: Intl.DateTimeFormatOptions = {
     month: "2-digit",
     day: "2-digit",
@@ -159,6 +188,7 @@ const InviteLinks = ({ userId }: { userId: string }) => {
                               <button
                                 className={styles.redbutton}
                                 title="Cancel Invitation link"
+                                onClick={() => cancelInvite(i.hash)}
                               >
                                 Cancel
                               </button>
@@ -167,9 +197,13 @@ const InviteLinks = ({ userId }: { userId: string }) => {
                               <button
                                 className={styles.redbutton}
                                 title="Revoke permission"
+                                onClick={() => revokeInvite(i.hash, i.user)}
                               >
                                 Revoke
                               </button>
+                            )}
+                            {i.status != "Pending" && i.status != "Invited" && (
+                              <span>No Actions</span>
                             )}
                           </td>
                         </tr>
