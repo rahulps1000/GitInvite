@@ -16,7 +16,7 @@ GitInvite is an open-source website that allows users to generate secure and pro
 
 You can start using GitInvite directly by visiting:
 
-[GitInvite Website]() -- deplyment pending
+[GitInvite Website](https://gitinvite.vercel.app/)
 
     1. Sign in with your GitHub account.
     2. Select a repository and generate an invite link.
